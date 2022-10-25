@@ -1,4 +1,9 @@
+// Simple Book Store Program in Java
+
 import java.util.*;
+
+// class > Books 
+// Storing all the attributes of a particular book ! 
 
 class Books {
   public String title;
@@ -52,12 +57,16 @@ class Books {
   }
 }
 
+// class > BookStore 
+// The main working program class
+
 public class BookStore {
 
   /**
    * @param args
    * @throws Exception
    */
+  
   public static void main(String[] args) throws Exception {
     double amount = 0.0;
     double sum = 0.0;
