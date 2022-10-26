@@ -13,16 +13,16 @@ class Books {
   public double discount;
   public double total;
 
-  public Books() {}
+  public Books() {
+  }
 
   public Books(
-    String title,
-    String author,
-    int isbn,
-    double price,
-    double discount,
-    double total
-  ) {
+      String title,
+      String author,
+      int isbn,
+      double price,
+      double discount,
+      double total) {
     super();
     this.title = title;
     this.author = author;
@@ -57,7 +57,7 @@ class Books {
   }
 }
 
-// class > BookStore 
+// class > BookStore
 // The main working program class
 
 public class BookStore {
@@ -66,7 +66,7 @@ public class BookStore {
    * @param args
    * @throws Exception
    */
-  
+
   public static void main(String[] args) throws Exception {
     double amount = 0.0;
     double sum = 0.0;
@@ -87,15 +87,15 @@ public class BookStore {
     boolean quit = false;
     do {
       if (count > 5) {
-        System.out.println("You cannot buy more than 5 books at a time.");
+        System.out.println("You cannot buy more than 5 books at a time !");
       }
 
-      System.out.print("Please enter your choice: ");
+      System.out.print("Please enter your choice ?");
       menu = scan.nextInt();
       System.out.println();
       switch (menu) {
 
-        // Buy A Book ? 
+        // Buy A Book ?
         case 1:
           count++;
           System.out.println("Book Title: ");
@@ -108,66 +108,102 @@ public class BookStore {
           double p = scan.nextDouble();
           System.out.println("Discount: ");
           double dis = scan.nextDouble();
-          double total = p - (dis * p);
+
+          // Calculating discount ?
+          double total = p - ((p * dis) / 100);
           list.add(new Books(booktitle, auth, no, p, dis, total));
           break;
 
-          case 2: 
+        case 2:
 
-          //View books in cart ?
+          // View books in cart ?
           System.out.println("ID\tTitle\tAuthor\tISBN\tPrice\tDiscount\tTotal");
           int idCounter = 0;
           for (Books s : list) {
             System.out.println(
-              idCounter + 
-              "\t" + 
-              s.getTitle() +
-              "\t" +
-              s.getAuthor() +
-              "\t" +
-              s.getIsbn() +
-              "\t" +
-              s.getPrice() +
-              "\t" +
-              s.getDiscount() +
-              "\t" +
-              s.getTotal()
-            );
+                idCounter +
+                    "\t" +
+                    s.getTitle() +
+                    "\t" +
+                    s.getAuthor() +
+                    "\t" +
+                    s.getIsbn() +
+                    "\t" +
+                    s.getPrice() +
+                    "\t" +
+                    s.getDiscount() +
+                    "\t" +
+                    s.getTotal());
           }
+          break;
+
+        case 3:
+
+          // Remove a book from the bucket list !
+          System.out.println("ID\tTitle\tAuthor\tISBN\tPrice\tDiscount\tTotal");
+          int id = 0;
+          for (Books s : list) {
+            System.out.println(
+                id++ +
+                    "\t" +
+                    s.getTitle() +
+                    "\t" +
+                    s.getAuthor() +
+                    "\t" +
+                    s.getIsbn() +
+                    "\t" +
+                    s.getPrice() +
+                    "\t" +
+                    s.getDiscount() +
+                    "\t" +
+                    s.getTotal());
+          }
+
+          System.out.println("Please select an ID for removal ?");
+          int removalID = scan.nextInt();
+
+          if (removalID <= id) {
+            // Removal
+            list.remove(removalID);
+          }
+
+          System.out.println("Selected book has been removed !");
+
+          break;
+
         case 4:
 
-        // Printing store reciept !
+          // Printing store reciept !
           System.out.println("ID\tTitle\tAuthor\tISBN\tPrice\tDiscount\tTotal");
 
           for (Books s : list) {
             System.out.println(
-              s.getTitle() +
-              "\t" +
-              s.getAuthor() +
-              "\t" +
-              s.getIsbn() +
-              "\t" +
-              s.getPrice() +
-              "\t" +
-              s.getDiscount() +
-              "\t" +
-              s.getTotal()
-            );
+                s.getTitle() +
+                    "\t" +
+                    s.getAuthor() +
+                    "\t" +
+                    s.getIsbn() +
+                    "\t" +
+                    s.getPrice() +
+                    "\t" +
+                    s.getDiscount() +
+                    "\t" +
+                    s.getTotal());
             sum += s.getTotal();
           }
-          System.out.println("Total= " + sum);
+          System.out.println("Total Price >>>" + sum);
           break;
         case 5:
           System.out.println("Customer Pays: ");
           amount = scan.nextDouble();
           double balance = amount - sum;
-          System.out.println("Balance is: " + balance);
+          System.out.println("Balance is >>> " + balance);
           quit = true;
         case 6:
           quit = true;
           break;
 
-          // Default case ! 
+        // Default case !
         default:
           System.out.println("Invalid Entry!");
       }
