@@ -74,7 +74,7 @@ public class BookStore {
     List<Books> list = new ArrayList<Books>();
     Scanner scan = new Scanner(System.in);
     int menu = 0;
-    System.out.println("Book Store");
+    System.out.println("Welcome To Our Book Store");
     System.out.println();
 
     System.out.println("1. Buy A Book ?");
@@ -89,8 +89,8 @@ public class BookStore {
       if (count > 5) {
         System.out.println("You cannot buy more than 5 books at a time !");
       }
-
-      System.out.print("Please enter your choice ?");
+      System.out.println();
+      System.out.print("Please enter your choice ? ");
       menu = scan.nextInt();
       System.out.println();
       switch (menu) {
@@ -111,6 +111,8 @@ public class BookStore {
 
           // Calculating discount ?
           double total = p - ((p * dis) / 100);
+
+          // Adding new book to list !
           list.add(new Books(booktitle, auth, no, p, dis, total));
           break;
 
@@ -121,7 +123,7 @@ public class BookStore {
           int idCounter = 0;
           for (Books s : list) {
             System.out.println(
-                idCounter +
+                idCounter++ +
                     "\t" +
                     s.getTitle() +
                     "\t" +
@@ -135,6 +137,7 @@ public class BookStore {
                     "\t" +
                     s.getTotal());
           }
+          // System.out.println();
           break;
 
         case 3:
@@ -166,9 +169,9 @@ public class BookStore {
             // Removal
             list.remove(removalID);
           }
-
+          System.out.println();
           System.out.println("Selected book has been removed !");
-
+          count--;
           break;
 
         case 4:
@@ -191,14 +194,29 @@ public class BookStore {
                     s.getTotal());
             sum += s.getTotal();
           }
-          System.out.println("Total Price >>>" + sum);
+          System.out.println();
+          System.out.print("Total Price > " + sum);
+          System.out.println();
           break;
+
         case 5:
-          System.out.println("Customer Pays: ");
+
+          for (Books s : list) {
+            sum += s.getTotal();
+          }
+
+          System.out.println("Amount To Be Paid > " + sum);
+          System.out.print("Customer Pays > ");
           amount = scan.nextDouble();
+          System.out.println();
           double balance = amount - sum;
-          System.out.println("Balance is >>> " + balance);
+          System.out.println("Please Collect Your Balance > " + balance);
+          System.out.println();
+          System.out.println("Thank You, Please Visit Again !");
           quit = true;
+
+          System.out.println();
+
         case 6:
           quit = true;
           break;
@@ -210,3 +228,5 @@ public class BookStore {
     } while (!quit);
   }
 }
+
+// End
